@@ -5,5 +5,5 @@
  *
  */
 
-// wp_functions
-include_once PLUGIN_DIR_PATH.'settings.php';
+// post_content
+include_once PLUGIN_DIR_PATH.'post_content/settings.php';

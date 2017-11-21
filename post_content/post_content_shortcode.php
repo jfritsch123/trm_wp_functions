@@ -6,6 +6,8 @@
  */
 /**
  * short code insert post content
+ * usage samples:
+ *  - [post-content slug="mode-aus-italien" content="thumbnail,title,main" permalink="thumbnail" more_text="<br>Weiterlesen..." post_type="page"]
  * @param $atts
  */
 function trm_post_content_shortcode($atts){
@@ -42,9 +44,9 @@ function trm_post_content_shortcode($atts){
 		}
 		if($content == 'title'){
 			if(in_array('title',$permalink_array)){
-				$res .= '<h3><a href="'.get_the_permalink( $post).'">'.$post->post_title.'</a></h3>';
+				$res .= '<h2><a href="'.get_the_permalink( $post).'">'.$post->post_title.'</a></h2>';
 			}else{
-				$res .= '<h3>'.$post->post_title.'</h3>';
+				$res .= '<h2>'.$post->post_title.'</h2>';
 			}
 		}
 		if($content == 'content'){

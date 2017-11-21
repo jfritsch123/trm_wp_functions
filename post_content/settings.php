@@ -2,10 +2,10 @@
 /**
  * post_content
  * settings
- *
+ * 
  */
 
-include_once PLUGIN_DIR_PATH.'/trm_wp_functions/post_content/post_content_shortcode.php';
+include_once PLUGIN_DIR_PATH.'post_content/post_content_shortcode.php';
 add_shortcode('post-content','trm_post_content_shortcode');
 
 //add_action( 'wp_enqueue_scripts', 'trm_wp_functions_enqueue' );
