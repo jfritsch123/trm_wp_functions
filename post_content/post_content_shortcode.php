@@ -8,6 +8,8 @@
  * short code insert post content
  * usage samples:
  *  - [post-content slug="mode-aus-italien" content="thumbnail,title,main" permalink="thumbnail" more_text="<br>Weiterlesen..." post_type="page"]
+ *
+ * inserted class: trm-insert-post-content $slug
  * @param $atts
  */
 function trm_post_content_shortcode($atts){
