@@ -23,8 +23,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define ('PLUGIN_DIR_PATH',plugin_dir_path(__FILE__ ));
-define ('PLUGIN_DIR_URL',plugin_dir_url(__FILE__ ));
+if ( ! defined( 'PLUGIN_DIR_PATH' ) ) define ('PLUGIN_DIR_PATH',plugin_dir_path(__FILE__ ));
+if ( ! defined( 'PLUGIN_DIR_URL' ) ) define ('PLUGIN_DIR_URL',plugin_dir_url(__FILE__ ));
 
 /**
  * The core plugin settings file
