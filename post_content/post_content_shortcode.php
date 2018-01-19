@@ -18,6 +18,7 @@ function trm_post_content_shortcode($atts){
 		'slug' => '',
 		'id' => false,
 		'content' => 'content',     // possible tags: title, content, main, thumbnail
+		'content_filter' => 'the_content',
 		'permalink' => 'false',     // all: link whole content, otherwise: title, content, thumbnail, false
 		'class' => '',
 		'more_text' => 'Weiterlesen&nbsp;...'
@@ -52,10 +53,11 @@ function trm_post_content_shortcode($atts){
 			}
 		}
 		if($content == 'content'){
+			$post_content = !empty($args['content_filter']) ? apply_filters($args['content_filter'],$post->post_content) : $post->post_content;
 			if(in_array('content',$permalink_array)){
-				$res .= '<a href="'.get_the_permalink( $post).'">'.$post->post_content.'</a>';
+				$res .= '<a href="'.get_the_permalink( $post).'">'.$post_content.'</a>';
 			}else{
-				$res .= $post->post_content;
+				$res .= $post_content;
 			}
 		}
 		if($content == 'main'){
@@ -75,7 +77,6 @@ function trm_post_content_shortcode($atts){
 	}
 
 	$res .= '</div>';
-	$post = $the_post;
 	return $res;
 }
 
