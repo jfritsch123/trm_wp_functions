@@ -24,59 +24,60 @@ function trm_post_content_shortcode($atts){
 		'more_text' => 'Weiterlesen&nbsp;...'
 	), $atts, 'page-content' );
 	global $post;
-	$the_post = $post;
 	$the_post_slug = $post->post_name;
-	$post = 'empty';
 
 	if($args['slug']){
-		$post = get_post_by_slug($args['slug'],$args['post_type']);
+		$getpost = get_post_by_slug($args['slug'],$args['post_type']);
+	}else{
+		$getpost = $post;
 	}
 	$res = '<div class="trm-insert-post-content '.$the_post_slug.' '.$args['class'].'">';
 	if($args['permalink'] == 'all'){
-		$res .= '<a href="'.get_the_permalink( $post).'">';
+		$res .= '<a href="'.get_the_permalink( $getpost).'">';
 	}
 	$content_array = explode(",",$args['content']);
 	$permalink_array = explode(",",$args['permalink']);
 	foreach($content_array as $content){
 		if($content == 'thumbnail'){
 			if(in_array('thumbnail',$permalink_array)){
-				$res .= '<a href="'.get_the_permalink( $post).'">'.get_the_post_thumbnail( $post).'</a>';
+				$res .= '<a href="'.get_the_permalink( $getpost).'">'.get_the_post_thumbnail( $getpost).'</a>';
 			}else{
-				$res .= get_the_post_thumbnail( $post);
+				$res .= get_the_post_thumbnail( $getpost);
 			}
 		}
 		if($content == 'title'){
 			if(in_array('title',$permalink_array)){
-				$res .= '<h2><a href="'.get_the_permalink( $post).'">'.$post->post_title.'</a></h2>';
+				$res .= '<h2><a href="'.get_the_permalink($getpost).'">'.$getpost->post_title.'</a></h2>';
 			}else{
-				$res .= '<h2>'.$post->post_title.'</h2>';
+				$res .= '<h2>'.$getpost->post_title.'</h2>';
 			}
 		}
 		if($content == 'content'){
-			$post_content = !empty($args['content_filter']) ? apply_filters($args['content_filter'],$post->post_content) : $post->post_content;
 			if(in_array('content',$permalink_array)){
-				$res .= '<a href="'.get_the_permalink( $post).'">'.$post_content.'</a>';
+				$res .= '<a href="'.get_the_permalink($getpost).'">'.$getpost->post_content.'</a>';
 			}else{
-				$res .= $post_content;
+				$res .= $getpost->post_content;
 			}
 		}
 		if($content == 'main'){
-			$result = get_extended($post->post_content) ;
+			$result = get_extended($getpost->post_content) ;
 			if ( in_array( 'main', $permalink_array ) ) {
-				$res .= '<a href="' . get_the_permalink( $post ) . '">' . $result['main'] . '</a>';
+				$res .= '<a href="' . get_the_permalink( $getpost ) . '">' . $result['main'] . '</a>';
 			} else {
 				$res .= $result['main'];
 				if(!empty($result['extended'])) {
-					$res .= ' <a href="' . get_the_permalink( $post ) . '">' . str_replace( " ", '&nbsp;', $args['more_text'] ) . '</a>';
+					$res .= ' <a href="' . get_the_permalink( $getpost ) . '">' . str_replace( " ", '&nbsp;', $args['more_text'] ) . '</a>';
 				}
 			}
 		}
 	}
-	if($atts['permalink'] == 'all'){
+	if($args['permalink'] == 'all'){
 		$res .= '</a>';
 	}
 
 	$res .= '</div>';
+	$res = !empty($args['content_filter']) ? apply_filters($args['content_filter'],$res) : $res;
+
 	return $res;
 }
 
