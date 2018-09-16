@@ -23,8 +23,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-if ( ! defined( 'PLUGIN_DIR_PATH' ) ) define ('PLUGIN_DIR_PATH',plugin_dir_path(__FILE__ ));
-if ( ! defined( 'PLUGIN_DIR_URL' ) ) define ('PLUGIN_DIR_URL',plugin_dir_url(__FILE__ ));
+if ( ! defined( 'TRM_POST_CONTENT_PLUGIN_DIR_PATH' ) ) define ('TRM_POST_CONTENT_PLUGIN_DIR_PATH',plugin_dir_path(__FILE__ ));
+if ( ! defined( 'TRM_POST_CONTENT_PLUGIN_DIR_URL' ) ) define ('TRM_POST_CONTENT_PLUGIN_DIR_URL',plugin_dir_url(__FILE__ ));
 
 /**
  * The core plugin settings file
